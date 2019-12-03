@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css"
+import { format } from "path";
 
 
 function Todo({ todo, index }) {
@@ -10,6 +11,28 @@ function Todo({ todo, index }) {
   )
 } 
 
+function TodoForm({addTodo}) {
+  const [value, setValue] = useState('');
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    addTodo(value);
+    setValue('')
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input 
+        type="text" 
+        className="input" 
+        value={value} 
+        onChange={e => setValue(e.target.value)}
+        placeholder="Add new to-do"
+        />
+    </form>
+  )
+}
+
 
 function App() {
   const [todos, setTodos] = useState([
@@ -18,6 +41,10 @@ function App() {
     { text: "Build really cool todo app" }
   ]);
 
+  const addTodo = text => {
+    const newTodos = [...todos, { text }];
+    setTodos(newTodos);
+  }
 
 
   return (
@@ -30,6 +57,8 @@ function App() {
             todo={todo}
           />
         ))}
+
+        <TodoForm addTodo={addTodo} />
       </div>
     </div>
   );
