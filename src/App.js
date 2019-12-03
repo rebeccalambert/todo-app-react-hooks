@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import "./App.css"
 
+
+function Todo({ todo, index }) {
+  return (
+    <div className="todo">
+      { todo.text }
+    </div>
+  )
+} 
+
+
 function App() {
   const [todos, setTodos] = useState([
     { text: "Learn about React" },
@@ -8,7 +18,7 @@ function App() {
     { text: "Build really cool todo app" }
   ]);
 
-  const Todo = ({ todo }) => <div className="todo">{todo.text}</div>;
+
 
   return (
     <div className="app">
